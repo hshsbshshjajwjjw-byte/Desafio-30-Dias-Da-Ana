@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Acompanhe seu desafio de 30 dias: treino, dieta e hidratação">
+  <meta name="theme-color" content="#ec4899">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Desafio 30">
+  <title>🎀 Desafio 30 Dias | Painel Rosa</title>
+  <link rel="manifest" href="/manifest.json">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #1a0a14;
+      --card-bg: rgba(255, 255, 255, 0.04);
+      --pink-light: #fbcfe8;
+      --pink-main: #f472b6;
+      --pink-hot: #ec4899;
+      --pink-glow: rgba(244, 114, 182, 0.35);
+      --text-main: #fdf2f8;
+      --text-muted: #e9d5ff;
+      --radius: 22px;
+      --shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: radial-gradient(circle at 20% 25%, rgba(236, 72, 153, 0.15) 0%, transparent 45%),
+                  radial-gradient(circle at 80% 75%, rgba(192, 132, 252, 0.1) 0%, transparent 45%),
+                  var(--bg);
+      color: var(--text-main);
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      padding: 2rem 1.2rem 5rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Floating background orbs */
+    body::before, body::after {
+      content: ''; position: fixed; border-radius: 50%; filter: blur(80px); opacity: 0.4;
+      animation: float 12s ease-in-out infinite;
+      z-index: 0; pointer-events: none;
+    }
+    body::before { width: 300px; height: 300px; background: var(--pink-hot); top: -50px; left: -50px; }
+    body::after { width: 250px; height: 250px; background: #c084fc; bottom: -40px; right: -40px; animation-delay: -6s; }
+    @keyframes float { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(25px) scale(1.05); } }
+
+    .container { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+
+    /* HEADER */
+    header {
+      display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem; margin-bottom: 2.5rem;
+    }
+    h1 {
+      font-size: 2rem; font-weight: 700;
+      background: linear-gradient(100deg, var(--pink-light), var(--pink-hot));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      letter-spacing: -0.5px;
+    }
+    .meta-panel {
+      display: flex; gap: 0.8rem; background: var(--card-bg); padding: 0.9rem 1.3rem;
+      border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(14px); box-shadow: var(--shadow);
+    }
+    .meta-field { display: flex; flex-direction: column; gap: 0.2rem; }
+    .meta-field label { font-size: 0.65rem; color: var(--pink-light); text-transform: uppercase; letter-spacing: 1.2px; font-weight: 500; }
+    .meta-field input {
+      background: transparent; border: 1px solid rgba(255,255,255,0.15); color: var(--text-main);
+      padding: 0.45rem 0.7rem; border-radius: 10px; font-family: inherit; width: 115px;
+      transition: 0.3s;
+    }
+    .meta-field input:focus { outline: none; border-color: var(--pink-main); box-shadow: 0 0 12px var(--pink-glow); }
+
+    /* STATS */
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 2.5rem;
+    }
+    .stat-card {
+      background: var(--card-bg); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius); padding: 1.3rem; text-align: center;
+      backdrop-filter: blur(10px); box-shadow: var(--shadow); transition: 0.3s;
+    }
+    .stat-card:hover { transform: translateY(-3px); box-shadow: 0 14px 35px rgba(244, 114, 182, 0.2); }
+    
+    .progress-wrap {
+      width: 65px; height: 65px; margin: 0 auto 0.8rem; border-radius: 50%;
+      background: conic-gradient(var(--pink-main) 0%, var(--pink-hot) 0%, rgba(255,255,255,0.05) 0%);
+      display: flex; align-items: center; justify-content: center; position: relative;
+    }
+    .progress-wrap::before { content: ''; position: absolute; inset: 4px; border-radius: 50%; background: var(--bg); }
+    .progress-val { position: relative; font-weight: 700; font-size: 1rem; color: var(--pink-light); }
+    .stat-num { font-size: 1.9rem; font-weight: 700; color: var(--pink-main); margin-bottom: 0.2rem; }
+    .stat-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+    /* DAYS GRID & CARDS */
+    .days-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.2rem;
+    }
+    .day-card {
+      background: var(--card-bg); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius); padding: 1.4rem; backdrop-filter: blur(10px);
+      transition: 0.35s cubic-bezier(0.25, 0.8, 0.25, 1); position: relative; overflow: hidden;
+    }
+    .day-card::after {
+      content: ''; position: absolute; inset: 0; border-radius: var(--radius);
+      background: radial-gradient(circle at top right, var(--pink-glow), transparent 60%);
+      opacity: 0; transition: 0.4s;
+    }
+    .day-card.complete { border-color: var(--pink-main); box-shadow: 0 0 20px var(--pink-glow); }
+    .day-card.complete::after { opacity: 0.6; }
+    .day-card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.06); }
+    
+    .day-head {
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;
+      border-bottom: 1px dashed rgba(255,255,255,0.15); padding-bottom: 0.6rem; position: relative; z-index: 1;
+    }
+    .day-title { font-weight: 600; font-size: 1rem; }
+    .day-badge {
+      font-size: 0.65rem; padding: 0.2rem 0.6rem; border-radius: 99px;
+      background: rgba(255,255,255,0.08); color: var(--pink-light); transition: 0.3s;
+    }
+    .day-card.complete .day-badge { background: var(--pink-main); color: #fff; font-weight: 600; }
+
+    /* SQUARE CHECKBOXES */
+    .check-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.5rem 0; cursor: pointer; user-select: none; position: relative; z-index: 1;
+    }
+    .check-label { font-size: 0.85rem; display: flex; align-items: center; gap: 0.5rem; }
+    .sq-box {
+      width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.2); border-radius: 6px;
+      position: relative; transition: 0.25s; display: flex; align-items: center; justify-content: center;
+    }
+    .sq-box::after {
+      content: '✓'; color: #fff; font-size: 12px; font-weight: 700;
+      transform: scale(0) rotate(-10deg); transition: 0.25s;
+    }
+    .sq-box.active {
+      background: linear-gradient(135deg, var(--pink-main), var(--pink-hot));
+      border-color: transparent; box-shadow: 0 0 10px var(--pink-glow);
+    }
+    .sq-box.active::after { transform: scale(1) rotate(0); }
+
+    /* CONTROLS */
+    .actions {
+      margin-top: 2.5rem; display: flex; gap: 0.8rem; justify-content: flex-end; flex-wrap: wrap;
+    }
+    .btn {
+      padding: 0.7rem 1.3rem; border: none; border-radius: 12px; font-weight: 500; cursor: pointer; transition: 0.25s;
+      background: rgba(255,255,255,0.08); color: var(--text-main); border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(8px);
+    }
+    .btn:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
+    .btn.pink {
+      background: linear-gradient(110deg, var(--pink-main), var(--pink-hot)); color: #fff; border: none;
+    }
+    .btn.pink:hover { filter: brightness(1.1); box-shadow: 0 8px 24px var(--pink-glow); }
+
+    @media (max-width: 650px) {
+      header { flex-direction: column; align-items: flex-start; }
+      .meta-panel { width: 100%; justify-content: space-between; }
+      .days-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+      h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🎀 Desafio 30 Dias</h1>
+      <div class="meta-panel">
+        <div class="meta-field">
+          <label>Data Início</label>
+          <input type="date" id="startDate" value="2025-04-25">
+        </div>
+        <div class="meta-field">
+          <label>Peso Atual</label>
+          <input type="number" id="currentWeight" value="10" step="0.1" min="0">
+        </div>
+      </div>
+    </header>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="progress-wrap" id="progressRing">
+          <span class="progress-val" id="progressText">0%</span>
+        </div>
+        <div class="stat-label">Progresso</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="completedDays">0</div>
+        <div class="stat-label">Dias 100%</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="currentStreak">0</div>
+        <div class="stat-label">Sequência</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="totalChecks">0</div>
+        <div class="stat-label">Checks Feitos</div>
+      </div>
+    </div>
+
+    <div class="days-grid" id="daysGrid"></div>
+
+    <div class="actions">
+      <button class="btn" onclick="exportData()">💾 Backup</button>
+      <button class="btn" onclick="importData()">📥 Importar</button>
+      <button class="btn pink" onclick="resetChallenge()">🗑️ Resetar</button>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'desafio30_rosa_v2';
+    const grid = document.getElementById('daysGrid');
+    const ring = document.getElementById('progressRing');
+    const pText = document.getElementById('progressText');
+    const elCompleted = document.getElementById('completedDays');
+    const elStreak = document.getElementById('currentStreak');
+    const elTotal = document.getElementById('totalChecks');
+
+    let state = { startDate: '2025-04-25', weight: 10, days: {} };
+
+    function init() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      state = saved ? JSON.parse(saved) : resetState();
+      
+      document.getElementById('startDate').value = state.startDate;
+      document.getElementById('currentWeight').value = state.weight;
+
+      renderGrid();
+      updateStats();
+      bindMeta();
+    }
+
+    function resetState() {
+      state.days = {};
+      for(let i=1; i<=30; i++) state.days[i] = { treino:false, dieta:false, agua:false };
+      return state;
+    }
+
+    function renderGrid() {
+      grid.innerHTML = '';
+      for(let d=1; d<=30; d++) {
+        const data = state.days[d] || { treino:false, dieta:false, agua:false };
+        const isComplete = data.treino && data.dieta && data.agua;
+        const card = document.createElement('div');
+        card.className = `day-card ${isComplete ? 'complete' : ''}`;
+        card.innerHTML = `
+          <div class="day-head">
+            <span class="day-title">Dia ${String(d).padStart(2,'0')}</span>
+            <span class="day-badge">${isComplete ? '✨ Completo' : '⏳ Pendente'}</span>
+          </div>
+          ${sqToggle(d, 'treino', '🏋️‍♀️ Treino', data.treino)}
+          ${sqToggle(d, 'dieta', '🥗 Dieta ≤1500kcal', data.dieta)}
+          ${sqToggle(d, 'agua', '💧 Água ≥2L', data.agua)}
+        `;
+        grid.appendChild(card);
+      }
+    }
+
+    function sqToggle(day, type, label, checked) {
+      return `<div class="check-row" onclick="flip(${day}, '${type}')">
+        <span class="check-label">${label}</span>
+        <div class="sq-box ${checked ? 'active' : ''}"></div>
+      </div>`;
+    }
+
+    window.flip = function(day, type) {
+      if(!state.days[day]) state.days[day] = { treino:false, dieta:false, agua:false };
+      state.days[day][type] = !state.days[day][type];
+      save(); renderGrid(); updateStats();
+    };
+
+    function updateStats() {
+      let checks = 0, completed = 0;
+      for(let d=1; d<=30; d++) {
+        const dt = state.days[d] || { treino:false, dieta:false, agua:false };
+        checks += (dt.treino ? 1 : 0) + (dt.dieta ? 1 : 0) + (dt.agua ? 1 : 0);
+        if(dt.treino && dt.dieta && dt.agua) completed++;
+      }
+      const pct = Math.round((checks / 90) * 100);
+      pText.textContent = `${pct}%`;
+      ring.style.background = `conic-gradient(var(--pink-main) ${pct}%, var(--pink-hot) ${pct}%, rgba(255,255,255,0.05) ${pct}%)`;
+      
+      elCompleted.textContent = completed;
+      elTotal.textContent = checks;
+      
+      let streak = 0;
+      for(let d=1; d<=30; d++) {
+        const dt = state.days[d] || { treino:false, dieta:false, agua:false };
+        if(dt.treino && dt.dieta && dt.agua) streak++; else break;
+      }
+      elStreak.textContent = streak;
+    }
+
+    function save() {
+      state.startDate = document.getElementById('startDate').value;
+      state.weight = parseFloat(document.getElementById('currentWeight').value) || 0;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function bindMeta() {
+      document.getElementById('startDate').onchange = save;
+      document.getElementById('currentWeight').oninput = save;
+    }
+
+    window.resetChallenge = () => {
+      if(confirm('⚠️ Tem certeza? Todo o progresso será apagado permanentemente.')) {
+        resetState(); save(); renderGrid(); updateStats();
+      }
+    };
+
+    window.exportData = () => {
+      const blob = new Blob([JSON.stringify(state, null, 2)], {type: 'application/json'});
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+      a.download = 'desafio30_backup.json'; a.click();
+    };
+
+    window.importData = () => {
+      const inp = document.createElement('input'); inp.type = 'file'; inp.accept = '.json';
+      inp.onchange = e => {
+        const reader = new FileReader();
+        reader.onload = ev => {
+          try { state = JSON.parse(ev.target.result); save(); renderGrid(); updateStats(); alert('✅ Dados carregados!'); }
+          catch { alert('❌ Arquivo inválido.'); }
+        };
+        reader.readAsText(e.target.files[0]);
+      };
+      inp.click();
+    };
+
+    init();
+
+    // Registra o Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(reg => console.log('✅ Service Worker registrado:', reg.scope))
+          .catch(err => console.log('❌ Erro ao registrar Service Worker:', err));
+      });
+    }
+  </script>
+</body>
+</html>

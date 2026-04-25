@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instruções - Desafio 30 Dias PWA</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      line-height: 1.6;
+      background: #1a0a14;
+      color: #fdf2f8;
+    }
+    h1 { color: #f472b6; }
+    h2 { color: #ec4899; margin-top: 30px; }
+    code {
+      background: rgba(255,255,255,0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+    .step {
+      background: rgba(255,255,255,0.05);
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 8px;
+      border-left: 4px solid #ec4899;
+    }
+    a { color: #f472b6; }
+  </style>
+</head>
+<body>
+  <h1>🌸 Como Instalar o App Desafio 30 Dias</h1>
+  
+  <h2>📱 No Celular (Android/iOS)</h2>
+  
+  <div class="step">
+    <h3>Android (Chrome/Edge)</h3>
+    <ol>
+      <li>Abra o site no navegador Chrome ou Edge</li>
+      <li>Toque no menu (⋮) no canto superior direito</li>
+      <li>Selecione "Instalar app" ou "Adicionar à tela inicial"</li>
+      <li>Confirme a instalação</li>
+      <li>O app aparecerá na sua tela inicial como um app normal!</li>
+    </ol>
+  </div>
+
+  <div class="step">
+    <h3>iOS (Safari)</h3>
+    <ol>
+      <li>Abra o site no Safari</li>
+      <li>Toque no botão de compartilhar (□↑) na parte inferior</li>
+      <li>Role para baixo e toque em "Adicionar à Tela de Início"</li>
+      <li>Edite o nome se desejar e toque em "Adicionar"</li>
+      <li>O ícone aparecerá na sua tela inicial!</li>
+    </ol>
+  </div>
+
+  <h2>💻 No Computador (Desktop)</h2>
+  
+  <div class="step">
+    <h3>Chrome/Edge/Brave</h3>
+    <ol>
+      <li>Abra o site no navegador</li>
+      <li>Clique no ícone de instalação (⊕) na barra de endereço</li>
+      <li>Ou vá em Menu → "Instalar Desafio 30 Dias"</li>
+      <li>Confirme a instalação</li>
+      <li>O app abrirá em uma janela própria!</li>
+    </ol>
+  </div>
+
+  <h2>🚀 Como Hospedar (para funcionar online)</h2>
+  
+  <div class="step">
+    <h3>Opção 1: GitHub Pages (Grátis e Fácil)</h3>
+    <ol>
+      <li>Crie uma conta no <a href="https://github.com" target="_blank">GitHub</a></li>
+      <li>Crie um novo repositório público</li>
+      <li>Faça upload dos arquivos: <code>index.html</code>, <code>manifest.json</code>, <code>sw.js</code></li>
+      <li>Vá em Settings → Pages</li>
+      <li>Selecione a branch "main" e clique em Save</li>
+      <li>Seu site estará em: <code>https://seu-usuario.github.io/nome-repo</code></li>
+    </ol>
+  </div>
+
+  <div class="step">
+    <h3>Opção 2: Netlify/Vercel (Grátis, Mais Rápido)</h3>
+    <ol>
+      <li>Acesse <a href="https://netlify.com" target="_blank">Netlify</a> ou <a href="https://vercel.com" target="_blank">Vercel</a></li>
+      <li>Faça login com GitHub</li>
+      <li>Arraste a pasta com os arquivos para fazer deploy</li>
+      <li>Pronto! Você terá um link tipo <code>https://seu-app.netlify.app</code></li>
+    </ol>
+  </div>
+
+  <div class="step">
+    <h3>Opção 3: Testar Localmente</h3>
+    <p>Para testar no seu computador antes de hospedar:</p>
+    <ol>
+      <li>Instale o Python (se não tiver)</li>
+      <li>Abra o terminal na pasta do projeto</li>
+      <li>Execute: <code>python -m http.server 8000</code></li>
+      <li>Acesse: <code>http://localhost:8000</code></li>
+    </ol>
+  </div>
+
+  <h2>🎨 Criar os Ícones PNG</h2>
+  
+  <div class="step">
+    <p>Você precisa converter o <code>icon.svg</code> para PNG nos tamanhos 192x192 e 512x512:</p>
+    <ul>
+      <li><strong>Online:</strong> Use <a href="https://cloudconvert.com/svg-to-png" target="_blank">CloudConvert</a> ou <a href="https://svgtopng.com" target="_blank">SVG to PNG</a></li>
+      <li><strong>Photoshop/GIMP:</strong> Abra o SVG e exporte como PNG</li>
+      <li><strong>Canva:</strong> Importe o SVG e baixe como PNG</li>
+    </ul>
+    <p>Salve como <code>icon-192.png</code> e <code>icon-512.png</code> na mesma pasta</p>
+  </div>
+
+  <h2>✅ Vantagens do PWA</h2>
+  <ul>
+    <li>✨ Funciona offline após primeira visita</li>
+    <li>💾 Dados salvos localmente no dispositivo</li>
+    <li>📱 Ícone na tela inicial como app nativo</li>
+    <li>⚡ Carregamento rápido</li>
+    <li>🔒 Funciona com HTTPS (necessário para PWA)</li>
+    <li>📊 Progresso mantido mesmo sem internet</li>
+  </ul>
+
+  <h2>❓ Problemas Comuns</h2>
+  
+  <div class="step">
+    <p><strong>Botão de instalar não aparece?</strong></p>
+    <ul>
+      <li>Certifique-se que está usando HTTPS (não HTTP)</li>
+      <li>Verifique se o manifest.json está acessível</li>
+      <li>Abra o DevTools (F12) → Application → Manifest para ver erros</li>
+    </ul>
+  </div>
+
+  <div class="step">
+    <p><strong>Service Worker não registra?</strong></p>
+    <ul>
+      <li>Verifique o console (F12) para erros</li>
+      <li>Certifique-se que o sw.js está na raiz do site</li>
+      <li>Limpe o cache e recarregue (Ctrl+Shift+R)</li>
+    </ul>
+  </div>
+
+  <hr style="margin: 40px 0; border-color: rgba(255,255,255,0.1);">
+  
+  <p style="text-align: center; color: #e9d5ff;">
+    <a href="index.html">← Voltar para o App</a>
+  </p>
+</body>
+</html>
